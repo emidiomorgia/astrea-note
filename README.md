@@ -1,63 +1,74 @@
 # 🌟 Astrea Note
 
+<div align="center">
+  <img src="[Logo Placeholder URL]" alt="Logo Astrea Note: simbolo astratto minimalista che suggerisce flusso finanziario e ordine, reso in bianco su sfondo blu." width="200"/>
+  <h1>Astrea Note</h1>
+  <p>Software Open Source per la gestione delle note spese aziendali</p>
+</div>
 
-
-| CI/CD Status | Test Coverage | SonarQube Quality |
-| :---: | :---: | :---: |
-| [![Build Status][build-badge]][build-link] | [![Test Coverage][coverage-badge]][coverage-link] | [![Quality Gate][quality-badge]][quality-link] |
-
----
-
-## ✨ Abstract: Your Financial Register of Order and Efficiency
-
-**Astrea Note** is the definitive, **Open Source** software solution for the **management, archiving, and electronic submission** of corporate expense reports.
-
-Inspired by **Astrea**, the mythological figure embodying order and justice, our project is designed to **eliminate the chaos** of manual reporting processes. It ensures that every transaction is transformed into **clean, traceable, and compliant financial data.**
+| GitHub Repo | License |
+| :---: | :---: |
+| [https://github.com/emidiomorgia/astrea-note](https://github.com/emidiomorgia/astrea-note) | [![License][license-badge]][license-link] |
 
 ---
 
-## 🚀 Key Features & Vision
+## ✨ Abstract: Il Vostro Registro Finanziario di Ordine ed Efficienza
 
-Our primary goal is to provide a system that supports the principle of **financial correctness** (Astrea's Justice) through **maximum operational efficiency**.
+**Astrea Note** è la soluzione software definitiva, **Open Source**, per la **gestione, l'archiviazione e l'invio telematico** delle note spese aziendali.
 
-* **Rapid Reporting:** Intuitive user interface for quick receipt capture and submission.
-* **Orderly Workflow:** Configurable approval flows and real-time tracking of reimbursement status.
-* **Compliance:** Secure document storage and standardized accounting export support.
-* **Trunk Based Development (TBD):** We prioritize stability with continuous integration onto the `main` branch.
+Ispirato ad **Astrea**, la figura mitologica che incarna l'ordine e la giustizia, il nostro progetto è stato creato per **eliminare il caos** della rendicontazione manuale, garantendo che ogni transazione sia trasformata in un dato **pulito, tracciabile e conforme**.
 
-## 🏛️ Architecture and Development
+## 🏛️ Architettura e Sviluppo
 
-This project uses a **Monorepo** structure, which is critical for enforcing the **Trunk Based Development** model by enabling atomic commits across services. This structure ensures maximum cohesion and rapid integration between components.
+Il progetto adotta una **Monorepo** per supportare efficacemente il **Trunk Based Development (TBD)** e garantire *commit* atomici tra tutti i servizi.
 
-The codebase is logically organized into the following directories:
+### Struttura dei Componenti
 
-* `/frontend`: Web and/or mobile application (e.g., React/Vue).
-* `/bff`: Backend For Frontend, optimized for specific client needs.
-* `/services`: Independent Microservices (built with Quarkus).
-* `/shared`: Common libraries, API contracts, and Design System components.
-* **/deployment**: Contains all necessary **Kubernetes YAML files** for deployment.
+L'applicazione è suddivisa in **cinque microservizi backend**, un **Backend For Frontend (BFF)** e un **Frontend**:
+
+| Componente | Descrizione | Linguaggio |
+| :--- | :--- | :--- |
+| **frontend** | Interfaccia utente web/mobile. | [Es. React/Vue/etc.] |
+| **bff** | Strato intermedio ottimizzato per le chiamate UI. | Quarkus (Java 21) |
+| **identity-micro** | Gestione di Autenticazione (AuthN) e Autorizzazione (AuthZ). | Quarkus (Java 21) |
+| **notes-micro** | Logica principale per la creazione e la gestione delle singole note spese. | Quarkus (Java 21) |
+| **reports-micro** | Gestione della logica di aggregazione e generazione dei report contabili. | Quarkus (Java 21) |
+| **common-data-micro** | Gestione dei dati comuni statici o di configurazione. | Quarkus (Java 21) |
+
+### Stato dei Componenti (Build & Quality)
+
+Lo stato di integrazione e la qualità del codice per ogni componente sono tracciati di seguito.
+
+| Componente | Build Status | Test Coverage | Sonar Quality |
+| :--- | :---: | :---: | :---: |
+| `frontend` | [![Build Status][fe-build-badge]][fe-build-link] | [![Test Coverage][fe-coverage-badge]][fe-coverage-link] | [![Quality Gate][fe-quality-badge]][fe-quality-link] |
+| `bff` | [![Build Status][bff-build-badge]][bff-build-link] | [![Test Coverage][bff-coverage-badge]][bff-coverage-link] | [![Quality Gate][bff-quality-badge]][bff-quality-link] |
+| `identity-micro` | [![Build Status][id-build-badge]][id-build-link] | [![Test Coverage][id-coverage-badge]][id-coverage-link] | [![Quality Gate][id-quality-badge]][id-quality-link] |
+| `notes-micro` | [![Build Status][notes-build-badge]][notes-build-link] | [![Test Coverage][notes-coverage-badge]][notes-coverage-link] | [![Quality Gate][notes-quality-badge]][notes-quality-link] |
+| `reports-micro` | [![Build Status][reports-build-badge]][reports-build-link] | [![Test Coverage][reports-coverage-badge]][reports-coverage-link] | [![Quality Gate][reports-quality-badge]][reports-quality-link] |
+| `common-data-micro` | [![Build Status][cd-build-badge]][cd-build-link] | [![Test Coverage][cd-coverage-badge]][cd-coverage-link] | [![Quality Gate][cd-quality-badge]][cd-quality-link] |
 
 ### Core Technologies
 
-* **Backend Runtime:** **Java Quarkus** running on **JDK 21 LTS** (ensuring high performance and low memory footprint).
+* **Backend Runtime:** **Java Quarkus** running on **JDK 21 LTS**.
 * **Monorepo Tooling:** [e.g., Nx / Turborepo]
 * **Persistence/Messaging (Local Dev):** **MongoDB** and **Kafka**.
-* **Deployment Strategy:** **Quarkus Native** compilation via **Dockerfile** for production images, orchestrated by **Kubernetes**.
+* **Deployment Strategy:** **Quarkus Native** compilation via **Dockerfile** for production images, orchestrated da **Kubernetes** (`/deployment` folder).
 
 ---
 
-## 🛠️ Getting Started
+## 🛠️ Come Iniziare (Getting Started)
 
-### Prerequisites
+### Prerequisiti
 
 * **Java Development Kit (JDK) 21 (LTS)**
-* **Maven or Gradle**
-* **Docker and Docker Compose** (required to run local runtime services)
-* [Monorepo Tooling CLI, e.g., `npm install -g nx`]
+* **Maven o Gradle**
+* **Docker e Docker Compose** (richiesti per eseguire i servizi di runtime locali)
+* [Monorepo Tooling CLI, es. `npm install -g nx`]
 
-### Local Setup
+### Setup Locale
 
-1.  Clone the repository:
+1.  Clona il repository:
     ```bash
     git clone [https://github.com/emidiomorgia/astrea-note.git](https://github.com/emidiomorgia/astrea-note.git)
     cd astrea-note
@@ -66,56 +77,88 @@ The codebase is logically organized into the following directories:
     ```bash
     npm install
     ```
-3.  **Start Runtime Services (Mongo and Kafka):**
-    From the root directory, use Docker Compose:
+3.  **Avvia i Servizi di Runtime (Mongo e Kafka):**
+    Dalla directory principale, usa Docker Compose:
     ```bash
     docker compose up -d
     ```
-4.  **Build and Run the Frontend/BFF:**
-    Start the components of interest (example using an assumed service name):
+4.  **Compila e Avvia i Componenti:**
+    Avvia i componenti di interesse (esempio con un microservizio e il frontend):
     ```bash
-    # Build and run a Quarkus microservice in development mode
-    cd services/expense-service/
+    # Avvia un microservizio Quarkus in modalità sviluppo
+    cd services/notes-micro/
     ./mvnw quarkus:dev
     
-    # Or start the Frontend
+    # Avvia il Frontend (dipende dal tool Monorepo)
     nx serve frontend 
     ```
 
-### Production Deployment
+---
 
-Microservices are built using **Quarkus Native** (via GraalVM) for optimal performance. The required build steps are contained within the dedicated **Dockerfile** in each service folder.
+## 🤝 Contribuire (Contributing)
 
-Deployment to production is handled via the YAML files located in the **/deployment** directory.
+Siamo un progetto Open Source e accogliamo con favore tutti i contributi!
+
+A causa del nostro modello **Trunk Based Development** e **Monorepo**, si prega di osservare le seguenti linee guida:
+
+1.  **Issue:** Discuti le modifiche più grandi creando prima un'issue.
+2.  **Branch Brevi:** Lavora su *branch* di breve durata e *merge* frequentemente sulla `main`.
+3.  **Test e Scope:** Assicurati di testare solo i componenti che hai modificato. Usa i comandi del *Monorepo Tooling* (es. `nx affected:test`) per limitare l'esecuzione dei test.
+4.  **Commit Atomici:** Se la tua funzionalità coinvolge più componenti (es. `frontend` e `bff`), includi tutte le modifiche in un unico commit/PR.
+
+Consulta il file [`CONTRIBUTING.md`](CONTRIBUTING.md) per i dettagli completi.
 
 ---
 
-## 🤝 Contributing
+## 📄 Licenza
 
-As an Open Source project, we welcome all contributions!
-
-Due to our **Trunk Based Development** and **Monorepo** structure, please observe the following guidelines:
-
-1.  **Issues:** Discuss large changes by opening an issue first.
-2.  **Short-Lived Branches:** Work on short-lived branches and merge frequently into `main`.
-3.  **Atomic Commits:** If your feature affects multiple components (e.g., `frontend` and a `service`), ensure all changes are included in a single, cohesive commit/PR.
-4.  **Testing:** Use monorepo commands (e.g., `nx affected:test`) to run tests only for the services you modified.
-
-Please review the [`CONTRIBUTING.md`](CONTRIBUTING.md) file for full details.
+Questo progetto è distribuito sotto licenza **[Es. MIT / Apache 2.0]**. Vedere il file [`LICENSE`](LICENSE) per i dettagli.
 
 ---
 
-## 📄 License
+### Badge Placeholder URLs (Sostituisci i link con quelli reali)
 
-This project is licensed under the **[e.g., MIT / Apache 2.0]** License. See the [`LICENSE`](LICENSE) file for details.
+[license-badge]: https://img.shields.io/badge/License-[License%20Name]-blue.svg
+[license-link]: LICENSE
 
----
+[fe-build-badge]: https://img.shields.io/github/actions/workflow/status/emidiomorgia/astrea-note/frontend-ci.yml?branch=main&style=flat-square&label=frontend
+[fe-build-link]: https://github.com/emidiomorgia/astrea-note/actions
+[fe-coverage-badge]: https://img.shields.io/codecov/c/github/emidiomorgia/astrea-note/main?flag=frontend&style=flat-square&label=coverage
+[fe-coverage-link]: https://codecov.io/gh/emidiomorgia/astrea-note
+[fe-quality-badge]: https://img.shields.io/sonarcloud/quality/emidiomorgia_astrea-note/frontend?style=flat-square&label=quality
+[fe-quality-link]: https://sonarcloud.io/dashboard?id=emidiomorgia_astrea-note
 
-### Badge Placeholder URLs (Using your GitHub repository)
+[bff-build-badge]: https://img.shields.io/github/actions/workflow/status/emidiomorgia/astrea-note/bff-ci.yml?branch=main&style=flat-square&label=bff
+[bff-build-link]: https://github.com/emidiomorgia/astrea-note/actions
+[bff-coverage-badge]: https://img.shields.io/codecov/c/github/emidiomorgia/astrea-note/main?flag=bff&style=flat-square&label=coverage
+[bff-coverage-link]: https://codecov.io/gh/emidiomorgia/astrea-note
+[bff-quality-badge]: https://img.shields.io/sonarcloud/quality/emidiomorgia_astrea-note/bff?style=flat-square&label=quality
+[bff-quality-link]: https://sonarcloud.io/dashboard?id=emidiomorgia_astrea-note
 
-[build-badge]: https://img.shields.io/github/actions/workflow/status/emidiomorgia/astrea-note/ci.yml?branch=main&style=flat-square
-[build-link]: https://github.com/emidiomorgia/astrea-note/actions
-[coverage-badge]: https://img.shields.io/codecov/c/github/emidiomorgia/astrea-note/main?style=flat-square
-[coverage-link]: https://codecov.io/gh/emidiomorgia/astrea-note
-[quality-badge]: https://img.shields.io/sonarcloud/quality/emidiomorgia_astrea-note?style=flat-square
-[quality-link]: https://sonarcloud.io/dashboard?id=emidiomorgia_astrea-note
+[id-build-badge]: https://img.shields.io/github/actions/workflow/status/emidiomorgia/astrea-note/identity-ci.yml?branch=main&style=flat-square&label=identity
+[id-build-link]: https://github.com/emidiomorgia/astrea-note/actions
+[id-coverage-badge]: https://img.shields.io/codecov/c/github/emidiomorgia/astrea-note/main?flag=identity&style=flat-square&label=coverage
+[id-coverage-link]: https://codecov.io/gh/emidiomorgia/astrea-note
+[id-quality-badge]: https://img.shields.io/sonarcloud/quality/emidiomorgia_astrea-note/identity?style=flat-square&label=quality
+[id-quality-link]: https://sonarcloud.io/dashboard?id=emidiomorgia_astrea-note
+
+[notes-build-badge]: https://img.shields.io/github/actions/workflow/status/emidiomorgia/astrea-note/notes-ci.yml?branch=main&style=flat-square&label=notes
+[notes-build-link]: https://github.com/emidiomorgia/astrea-note/actions
+[notes-coverage-badge]: https://img.shields.io/codecov/c/github/emidiomorgia/astrea-note/main?flag=notes&style=flat-square&label=coverage
+[notes-coverage-link]: https://codecov.io/gh/emidiomorgia/astrea-note
+[notes-quality-badge]: https://img.shields.io/sonarcloud/quality/emidiomorgia_astrea-note/notes?style=flat-square&label=quality
+[notes-quality-link]: https://sonarcloud.io/dashboard?id=emidiomorgia_astrea-note
+
+[reports-build-badge]: https://img.shields.io/github/actions/workflow/status/emidiomorgia/astrea-note/reports-ci.yml?branch=main&style=flat-square&label=reports
+[reports-build-link]: https://github.com/emidiomorgia/astrea-note/actions
+[reports-coverage-badge]: https://img.shields.io/codecov/c/github/emidiomorgia/astrea-note/main?flag=reports&style=flat-square&label=coverage
+[reports-coverage-link]: https://codecov.io/gh/emidiomorgia/astrea-note
+[reports-quality-badge]: https://img.shields.io/sonarcloud/quality/emidiomorgia_astrea-note/reports?style=flat-square&label=quality
+[reports-quality-link]: https://sonarcloud.io/dashboard?id=emidiomorgia_astrea-note
+
+[cd-build-badge]: https://img.shields.io/github/actions/workflow/status/emidiomorgia/astrea-note/commondata-ci.yml?branch=main&style=flat-square&label=commondata
+[cd-build-link]: https://github.com/emidiomorgia/astrea-note/actions
+[cd-coverage-badge]: https://img.shields.io/codecov/c/github/emidiomorgia/astrea-note/main?flag=commondata&style=flat-square&label=coverage
+[cd-coverage-link]: https://codecov.io/gh/emidiomorgia/astrea-note
+[cd-quality-badge]: https://img.shields.io/sonarcloud/quality/emidiomorgia_astrea-note/commondata?style=flat-square&label=quality
+[cd-quality-link]: https://sonarcloud.io/dashboard?id=emidiomorgia_astrea-note

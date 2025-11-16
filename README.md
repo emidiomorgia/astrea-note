@@ -1,9 +1,9 @@
 # 🌟 Astrea Note
 
 <div align="center">
-  <img src="[Logo Placeholder URL]" alt="Logo Astrea Note: simbolo astratto minimalista che suggerisce flusso finanziario e ordine, reso in bianco su sfondo blu." width="200"/>
+  <img src="[Logo Placeholder URL]" alt="Astrea Note Logo: minimalist abstract symbol suggesting financial flow and organizational order, rendered in white on a Gemini-blue background." width="200"/>
   <h1>Astrea Note</h1>
-  <p>Software Open Source per la gestione delle note spese aziendali</p>
+  <p>Open Source Expense Report Management Software</p>
 </div>
 
 | GitHub Repo | License |
@@ -12,34 +12,36 @@
 
 ---
 
-## ✨ Abstract: Il Vostro Registro Finanziario di Ordine ed Efficienza
+## ✨ Abstract: Your Financial Register of Order and Efficiency
 
-**Astrea Note** è la soluzione software definitiva, **Open Source**, per la **gestione, l'archiviazione e l'invio telematico** delle note spese aziendali.
+**Astrea Note** is the definitive, **Open Source** software solution for the **management, archiving, and electronic submission** of corporate expense reports.
 
-Ispirato ad **Astrea**, la figura mitologica che incarna l'ordine e la giustizia, il nostro progetto è stato creato per **eliminare il caos** della rendicontazione manuale, garantendo che ogni transazione sia trasformata in un dato **pulito, tracciabile e conforme**.
+Inspired by **Astrea**, the mythological figure embodying order and justice, our project is designed to **eliminate the chaos** of manual reporting processes. It ensures that every transaction is transformed into **clean, traceable, and compliant financial data.**
 
-## 🏛️ Architettura e Sviluppo
+---
 
-Il progetto adotta una **Monorepo** per supportare efficacemente il **Trunk Based Development (TBD)** e garantire *commit* atomici tra tutti i servizi.
+## 🏛️ Architecture and Development
 
-### Struttura dei Componenti
+The project adopts a **Monorepo** structure to effectively support **Trunk Based Development (TBD)** and ensure atomic commits across all interdependent services.
 
-L'applicazione è suddivisa in **cinque microservizi backend**, un **Backend For Frontend (BFF)** e un **Frontend**:
+### Component Structure
 
-| Componente | Descrizione | Linguaggio |
+The application is logically segmented into a Frontend, a BFF, and four core Microservices:
+
+| Component | Description | Technology Stack |
 | :--- | :--- | :--- |
-| **frontend** | Interfaccia utente web/mobile. | [Es. React/Vue/etc.] |
-| **bff** | Strato intermedio ottimizzato per le chiamate UI. | Quarkus (Java 21) |
-| **identity-micro** | Gestione di Autenticazione (AuthN) e Autorizzazione (AuthZ). | Quarkus (Java 21) |
-| **notes-micro** | Logica principale per la creazione e la gestione delle singole note spese. | Quarkus (Java 21) |
-| **reports-micro** | Gestione della logica di aggregazione e generazione dei report contabili. | Quarkus (Java 21) |
-| **common-data-micro** | Gestione dei dati comuni statici o di configurazione. | Quarkus (Java 21) |
+| **frontend** | Web/mobile user interface. | [e.g., React/Vue/Next.js] |
+| **bff** | Optimized Backend For Frontend layer. | Quarkus (Java 21) |
+| **identity-micro** | Handles Authentication (AuthN) and Authorization (AuthZ). | Quarkus (Java 21) |
+| **notes-micro** | Core logic for creating and managing individual expense notes. | Quarkus (Java 21) |
+| **reports-micro** | Manages aggregation logic and financial report generation. | Quarkus (Java 21) |
+| **common-data-micro** | Manages static configuration and global common data. | Quarkus (Java 21) |
 
-### Stato dei Componenti (Build & Quality)
+### Component Status (Build & Quality)
 
-Lo stato di integrazione e la qualità del codice per ogni componente sono tracciati di seguito.
+The continuous integration status and code quality for each component are tracked below.
 
-| Componente | Build Status | Test Coverage | Sonar Quality |
+| Component | Build Status | Test Coverage | Sonar Quality |
 | :--- | :---: | :---: | :---: |
 | `frontend` | [![Build Status][fe-build-badge]][fe-build-link] | [![Test Coverage][fe-coverage-badge]][fe-coverage-link] | [![Quality Gate][fe-quality-badge]][fe-quality-link] |
 | `bff` | [![Build Status][bff-build-badge]][bff-build-link] | [![Test Coverage][bff-coverage-badge]][bff-coverage-link] | [![Quality Gate][bff-quality-badge]][bff-quality-link] |
@@ -50,73 +52,77 @@ Lo stato di integrazione e la qualità del codice per ogni componente sono tracc
 
 ### Core Technologies
 
-* **Backend Runtime:** **Java Quarkus** running on **JDK 21 LTS**.
+* **Backend Runtime:** **Java Quarkus** running on **JDK 21 LTS** (Leveraging Virtual Threads for high performance).
 * **Monorepo Tooling:** [e.g., Nx / Turborepo]
 * **Persistence/Messaging (Local Dev):** **MongoDB** and **Kafka**.
-* **Deployment Strategy:** **Quarkus Native** compilation via **Dockerfile** for production images, orchestrated da **Kubernetes** (`/deployment` folder).
+* **Deployment Strategy:** **Quarkus Native** compilation via **Dockerfile**, orchestrated by **Kubernetes** (files located in the `/deployment` folder).
 
 ---
 
-## 🛠️ Come Iniziare (Getting Started)
+## 🛠️ Getting Started
 
-### Prerequisiti
+### Prerequisites
 
 * **Java Development Kit (JDK) 21 (LTS)**
-* **Maven o Gradle**
-* **Docker e Docker Compose** (richiesti per eseguire i servizi di runtime locali)
-* [Monorepo Tooling CLI, es. `npm install -g nx`]
+* **Maven or Gradle**
+* **Docker and Docker Compose** (required to run local runtime services)
+* [Monorepo Tooling CLI, e.g., `npm install -g nx`]
 
-### Setup Locale
+### Local Setup
 
-1.  Clona il repository:
+1.  Clone the repository:
     ```bash
     git clone [https://github.com/emidiomorgia/astrea-note.git](https://github.com/emidiomorgia/astrea-note.git)
     cd astrea-note
     ```
-2.  Installa le dipendenze:
+2.  Install dependencies:
     ```bash
     npm install
     ```
-3.  **Avvia i Servizi di Runtime (Mongo e Kafka):**
-    Dalla directory principale, usa Docker Compose:
+3.  **Start Runtime Services (Mongo and Kafka):**
+    From the root directory, use Docker Compose:
     ```bash
     docker compose up -d
     ```
-4.  **Compila e Avvia i Componenti:**
-    Avvia i componenti di interesse (esempio con un microservizio e il frontend):
+4.  **Build and Run Components:**
+    Start the components of interest (example launching a microservice and the frontend):
     ```bash
-    # Avvia un microservizio Quarkus in modalità sviluppo
+    # Start a Quarkus microservice in development mode
     cd services/notes-micro/
     ./mvnw quarkus:dev
     
-    # Avvia il Frontend (dipende dal tool Monorepo)
+    # Start the Frontend (using Monorepo Tooling)
     nx serve frontend 
     ```
 
----
+### Production Deployment
 
-## 🤝 Contribuire (Contributing)
-
-Siamo un progetto Open Source e accogliamo con favore tutti i contributi!
-
-A causa del nostro modello **Trunk Based Development** e **Monorepo**, si prega di osservare le seguenti linee guida:
-
-1.  **Issue:** Discuti le modifiche più grandi creando prima un'issue.
-2.  **Branch Brevi:** Lavora su *branch* di breve durata e *merge* frequentemente sulla `main`.
-3.  **Test e Scope:** Assicurati di testare solo i componenti che hai modificato. Usa i comandi del *Monorepo Tooling* (es. `nx affected:test`) per limitare l'esecuzione dei test.
-4.  **Commit Atomici:** Se la tua funzionalità coinvolge più componenti (es. `frontend` e `bff`), includi tutte le modifiche in un unico commit/PR.
-
-Consulta il file [`CONTRIBUTING.md`](CONTRIBUTING.md) per i dettagli completi.
+Microservices are built using **Quarkus Native** (via GraalVM) for optimal performance. The required build steps are contained within the dedicated **Dockerfile** in each service folder. Deployment to production is handled via the YAML files located in the **/deployment** directory.
 
 ---
 
-## 📄 Licenza
+## 🤝 Contributing
 
-Questo progetto è distribuito sotto licenza **[Es. MIT / Apache 2.0]**. Vedere il file [`LICENSE`](LICENSE) per i dettagli.
+As an Open Source project, we welcome all contributions!
+
+Due to our **Trunk Based Development** and **Monorepo** structure, please observe the following guidelines:
+
+1.  **Issues:** Discuss major changes by opening an issue first.
+2.  **Short-Lived Branches:** Work on short-lived branches and merge frequently into `main`.
+3.  **Testing and Scope:** Ensure you only test the components you have modified. Use Monorepo Tooling commands (e.g., `nx affected:test`) to limit test execution scope.
+4.  **Atomic Commits:** If your feature affects multiple components (e.g., `frontend` and `bff`), include all changes in a single, cohesive commit/PR.
+
+Please review the [`CONTRIBUTING.md`](CONTRIBUTING.md) file for full details.
 
 ---
 
-### Badge Placeholder URLs (Sostituisci i link con quelli reali)
+## 📄 License
+
+This project is licensed under the **[e.g., MIT / Apache 2.0]** License. See the [`LICENSE`](LICENSE) file for details.
+
+---
+
+### Badge Placeholder URLs (Using the provided GitHub repository)
 
 [license-badge]: https://img.shields.io/badge/License-[License%20Name]-blue.svg
 [license-link]: LICENSE
